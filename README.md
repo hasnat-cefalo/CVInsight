@@ -14,7 +14,7 @@ This is a FastAPI-based AI powered CV parser application that extracts structure
 
 ## 1. Clone the Repository
 ```bash
-git clone git_url
+git clone git@github.com:hasnat-cefalo/CVInsight.git
 cd CVInsight
 ```
 
@@ -25,7 +25,8 @@ Use Docker Compose to start the service:
 ```bash
 docker-compose up --build
 ```
-The API will be available at `http://127.0.0.1:80`.
+UI Link: [http://127.0.0.1:8501](http://127.0.0.1:8501) <br>
+API Link: [http://127.0.0.1:8000](http://127.0.0.1:8501)
 
 ### Option 2: Run Locally with Python
 #### 1. Set Up the Environment
@@ -39,8 +40,8 @@ pip install -r requirements.txt
 ```bash
 uvicorn app.main:app --reload
 ```
-UI: [http://127.0.0.1:8501](http://127.0.0.1:8501)
-API: [http://127.0.0.1:8000](http://127.0.0.1:8501)
+UI Link: [http://127.0.0.1:8501](http://127.0.0.1:8501) <br>
+API Link: [http://127.0.0.1:8000](http://127.0.0.1:8501)
 
 
 ## API Endpoints

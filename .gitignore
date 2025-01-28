@@ -7,3 +7,6 @@ __pycache__/
 *.sqlite3
 .env
 /tmp/
+.idea
+.env
+.venv
