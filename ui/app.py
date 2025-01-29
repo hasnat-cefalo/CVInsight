@@ -6,6 +6,18 @@ import os
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000/api/v1")
 
 def main():
+    # Custom CSS to reduce the gap before the title
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            margin-top: -50px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.title("CVInsight")
     st.subheader("AI powered CV Parser")
     st.write("")
@@ -15,9 +27,6 @@ def main():
     uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 
     if uploaded_file is not None:
-        # Display the uploaded file
-        st.write("Uploaded file:")
-        st.write(uploaded_file.name)
 
         # Send the file to the FastAPI backend
         if st.button("Parse CV"):

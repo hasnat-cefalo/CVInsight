@@ -7,6 +7,12 @@ This is a FastAPI-based AI powered CV parser application that extracts structure
 - Parse CV data (name, email, phone, education, experience, skills) using AI.
 - API for uploading and processing CVs.
 
+## Screenshots
+Welcome screen
+![](/media/images/screen_1.png "Welcome screen")
+Successfully parsed CV
+![](/media/images/screen_2.png "Successfully parsed CV")
+
 ## Prerequisites
 - Python 3.9 or higher
 - Docker and Docker Compose (optional, for containerized deployment)
