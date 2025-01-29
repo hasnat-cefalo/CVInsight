@@ -15,3 +15,6 @@ env/
 # Ignore local development files
 *.log
 *.sqlite3
+
+# ignore media files
+media/
