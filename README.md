@@ -9,9 +9,11 @@ This is a FastAPI-based AI powered CV parser application that extracts structure
 
 ## Screenshots
 Welcome screen
-![](/media/images/screen_1.png "Welcome screen")
+![](/media/images/screen-1.png "Welcome screen")
+CV (.pdf) file uploaded
+![](/media/images/screen-2.png "CV (.pdf) file uploaded")
 Successfully parsed CV
-![](/media/images/screen_2.png "Successfully parsed CV")
+![](/media/images/screen-3.png "Successfully parsed CV")
 
 ## Prerequisites
 - Python 3.9 or higher
