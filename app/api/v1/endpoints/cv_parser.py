@@ -1,9 +1,11 @@
+import os
+import logging
 from fastapi import APIRouter, File, UploadFile, HTTPException
 from app.services.pdf_parser import PDFParser
 from app.services.cv_processor import CVProcessor
 from app.models.cv_model import CVModel
-import os
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 @router.post("/parse-cv/", response_model=CVModel)
@@ -18,7 +20,9 @@ async def parse_cv(file: UploadFile = File(...)):
     try:
         text = PDFParser.extract_text_from_pdf(file_path)
         cv_data = CVProcessor.parse_cv(text)
+        logger.info("successfully parsed CV")
     finally:
         os.remove(file_path)
+        logger.info("Successfully removed CV")
 
     return cv_data
