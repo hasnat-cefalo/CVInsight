@@ -8,5 +8,4 @@ __pycache__/
 .env
 /tmp/
 .idea
-.env
 .venv

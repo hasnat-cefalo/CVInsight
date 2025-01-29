@@ -1,8 +1,10 @@
 fastapi==0.115.7
 pydantic==2.10.6
+pydantic-settings==2.7.1
 PyPDF2==3.0.1
 python-dotenv==1.0.1
 python-multipart==0.0.20
 requests==2.32.3
 streamlit==1.41.1
 uvicorn==0.34.0
+openai==1.60.2

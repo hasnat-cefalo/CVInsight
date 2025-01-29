@@ -64,31 +64,70 @@ API Link: [http://127.0.0.1:8000](http://127.0.0.1:8501)
      -H "Content-Type: multipart/form-data" \
      -F "file=@example.pdf"
     ```
-  - Response:
+  
+  - Response
+
     ```json
     {
       "name": "John Doe",
-      "email": "john.doe@example.com",
-      "phone": "123-456-7890",
+      "title": "Senior Software Engineer",
+      "contact": {
+        "email": "john.doe@example.com",
+        "phone": "+1234567890",
+        "location": "New York, USA",
+        "linkedin": "https://linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "website": "https://johndoe.com"
+      },
       "education": [
         {
-          "institution": "University of Example",
           "degree": "Bachelor of Science",
           "field_of_study": "Computer Science",
+          "institution": "University of Example",
+          "location": "New York, USA",
           "start_date": "2015-09-01",
-          "end_date": "2019-05-01"
+          "end_date": "2019-06-01"
+        },
+        {
+          "degree": "Master of Science",
+          "field_of_study": "Data Science",
+          "institution": "Example Tech University",
+          "location": "New York, USA",
+          "start_date": "2019-09-01",
+          "end_date": "2021-06-01"
         }
       ],
       "experience": [
         {
-          "company": "Example Corp",
-          "position": "Software Engineer",
-          "start_date": "2019-06-01",
-          "end_date": "2021-12-31",
-          "description": "Developed web applications using Python and FastAPI."
+          "position": "Data Analyst",
+          "company": "Tech Solutions Inc.",
+          "location": "New York, USA",
+          "start_date": "2021-06-01",
+          "end_date": "2023-12-01",
+          "responsibilities": "Analyzed large datasets to identify trends and improve business decisions."
+        },
+        {
+          "position": "Data Scientist",
+          "company": "Innovative Data Co.",
+          "location": "Remote",
+          "start_date": "2023-12-01",
+          "end_date": "Present",
+          "responsibilities": "Developed machine learning models for predictive analytics and automation."
         }
       ],
-      "skills": ["Python", "FastAPI", "Machine Learning"]
+      "skills": [
+        "Python",
+        "SQL",
+        "Machine Learning",
+        "Data Visualization",
+        "Big Data Technologies"
+      ],
+      "skills_from_work_experience": [
+        "Data Analysis",
+        "Statistical Modeling",
+        "Data Wrangling",
+        "Time Series Forecasting"
+      ]
     }
     ```
 

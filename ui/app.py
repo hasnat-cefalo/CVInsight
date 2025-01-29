@@ -61,32 +61,55 @@ def main():
                         with col1:
                             st.subheader("📜 Extracted Information")
                             st.write(f"**👤 Name:** {cv_data.get('name', 'N/A')}")
-                            st.write(f"**📧 Email:** {cv_data.get('email', 'N/A')}")
-                            st.write(f"**📞 Phone:** {cv_data.get('phone', 'N/A')}")
-                            st.write("---")
+                            st.write(f"**📧 Title:** {cv_data.get('title', 'N/A')}")
+
+                            # Education
+                            if "contact" in cv_data and cv_data["contact"]:
+                                contact = cv_data["contact"]
+                                st.write("---")
+                                st.subheader("📞 Contact")
+                                st.write(f"**Email:** {contact.get('email', 'N/A')}")
+                                st.write(f"**hone:** {contact.get('phone', 'N/A')}")
+                                st.write(f"**Location:** {contact.get('location', 'N/A')}")
+                                st.write(f"**Linkedin:** {contact.get('linkedin', 'N/A')}")
+                                st.write(f"**Github:** {contact.get('github', 'N/A')}")
+                                st.write(f"**Website:** {contact.get('website', 'N/A')}")
 
                             # Education
                             if "education" in cv_data and cv_data["education"]:
+                                st.write("---")
                                 st.subheader("🎓 Education")
                                 for edu in cv_data["education"]:
                                     st.write(f"**{edu.get('degree', 'N/A')} in {edu.get('field_of_study', 'N/A')}**")
                                     st.write(f"🏫 {edu.get('institution', 'N/A')}")
+                                    st.write(f"📍 {edu.get('location', 'N/A')}")
                                     st.write(f"🗓️ {format_date(edu.get('start_date', 'N/A'))} - {format_date(edu.get('end_date', 'N/A'))}")
-                                    st.write("---")
+                                    st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
+                                                unsafe_allow_html=True)
 
                             # Work Experience
                             if "experience" in cv_data and cv_data["experience"]:
+                                st.write("---")
                                 st.subheader("💼 Work Experience")
                                 for exp in cv_data["experience"]:
                                     st.write(f"**{exp.get('position', 'N/A')} at {exp.get('company', 'N/A')}**")
+                                    st.write(f"📍 {exp.get('location', 'N/A')}")
                                     st.write(f"🗓️ {format_date(exp.get('start_date', 'N/A'))} - {format_date(exp.get('end_date', 'N/A'))}")
-                                    st.write(f"📝 {exp.get('description', 'N/A')}")
-                                    st.write("---")
+                                    st.write(f"📝 {exp.get('responsibilities', 'N/A')}")
+                                    st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
+                                                unsafe_allow_html=True)
 
                             # Skills
                             if "skills" in cv_data and cv_data["skills"]:
+                                st.write("---")
                                 st.subheader("🛠 Skills")
                                 st.write(", ".join(cv_data["skills"]))
+
+                            # Skills from work experience
+                            if "skills_from_work_experience" in cv_data and cv_data["skills_from_work_experience"]:
+                                st.write("---")
+                                st.subheader("🛠 Skills from work experience")
+                                st.write(", ".join(cv_data["skills_from_work_experience"]))
 
                         # Column 2: Raw JSON Data
                         with col2:
@@ -94,6 +117,7 @@ def main():
                             st.json(cv_data)
 
                     else:
+                        print(response)
                         st.error(f"❌ Error: {response.status_code} - {response.text}")
 
                 except requests.exceptions.RequestException as e:

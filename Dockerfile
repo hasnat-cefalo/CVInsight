@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.9-slim AS base
+FROM python:3.10-slim AS base
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -8,14 +8,21 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     build-essential \
-    && apt-get clean \
+    libffi-dev \
+    libblas-dev \
+    liblapack-dev \
+    cython3 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy and install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+COPY .env .env
+# Install the spaCy model (replace `en_core_web_sm` with the model you need)
+#RUN python -m spacy download en_core_web_sm
 
 # Backend image
 FROM base AS backend

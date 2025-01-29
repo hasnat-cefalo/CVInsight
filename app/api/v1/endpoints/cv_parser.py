@@ -37,12 +37,17 @@ async def parse_cv(file: UploadFile = File(...),
         text = PDFParser.extract_text_from_pdf(file_path)
         cv_data = CVProcessor.parse_cv(text=text, service_type=service_type)
         logger.info("successfully parsed CV")
+        return cv_data
+    except Exception as e:
+        logger.error(f"Error processing CV: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
     finally:
         # Ensure the temporary file is deleted
         try:
-            os.remove(file_path)
-            logger.info(f"Temporary file {file_path} removed successfully")
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"Temporary file {file_path} removed successfully")
         except Exception as e:
             logger.error(f"Failed to remove temporary file: {e}")
 
-    return cv_data
+
