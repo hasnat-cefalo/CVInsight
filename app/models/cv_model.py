@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from typing import List, Optional
+
+from pydantic import BaseModel
+
 
 class Education(BaseModel):
     institution: str
@@ -8,12 +10,14 @@ class Education(BaseModel):
     start_date: str
     end_date: str
 
+
 class Experience(BaseModel):
     company: str
     position: str
     start_date: str
     end_date: str
     description: Optional[str]
+
 
 class CVModel(BaseModel):
     name: str

@@ -1,5 +1,6 @@
 import PyPDF2
 
+
 class PDFParser:
     @staticmethod
     def extract_text_from_pdf(file_path: str) -> str:

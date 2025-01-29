@@ -57,7 +57,10 @@ API Link: [http://127.0.0.1:8000](http://127.0.0.1:8501)
   - Upload a PDF file to parse the CV.
   - Example request:
     ```bash
-    curl -X POST -F "file=@path/to/your/resume.pdf" http://127.0.0.1:80/api/v1/parse-cv/
+    curl -X POST "http://127.0.0.1:80/api/v1/parse-cv/?service_type=nlp" \
+     -H "accept: application/json" \
+     -H "Content-Type: multipart/form-data" \
+     -F "file=@example.pdf"
     ```
   - Response:
     ```json
