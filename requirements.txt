@@ -8,3 +8,5 @@ requests==2.32.3
 streamlit==1.41.1
 uvicorn==0.34.0
 openai==1.60.2
+ollama==0.4.7
+google_generativeai==0.8.4

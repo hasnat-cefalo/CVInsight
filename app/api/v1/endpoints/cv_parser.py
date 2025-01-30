@@ -1,5 +1,6 @@
 import logging
 import os
+import traceback
 from enum import Enum
 
 from fastapi import APIRouter, File, UploadFile, HTTPException, Query
@@ -16,6 +17,8 @@ class ServiceType(str, Enum):
     NLP = "nlp"
     CHATGPT = "chatgpt"
     DEEPSEEK = "deepseek"
+    GEMINI = "gemini"
+    OLLAMA = "ollama"
 
 
 @router.post("/parse-cv/", response_model=CVModel)
@@ -40,6 +43,7 @@ async def parse_cv(file: UploadFile = File(...),
         return cv_data
     except Exception as e:
         logger.error(f"Error processing CV: {e}")
+        logger.error(traceback.format_exc())
         raise HTTPException(status_code=400, detail=str(e))
     finally:
         # Ensure the temporary file is deleted

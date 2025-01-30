@@ -2,7 +2,6 @@ prompt = """
 You are an expert in parsing and extracting structured information from CVs. Your task is to analyze the provided CV text and extract the following details in a structured JSON format. The JSON must strictly adhere to the schema provided below:
 
 ### JSON Schema:
-```json
 {
   "name": "Full Name of the Candidate",
   "title": "Professional Title or Role",
@@ -39,4 +38,10 @@ You are an expert in parsing and extracting structured information from CVs. You
     "Top 5 to 10 Skills Derived only from Work Experiences"
   ]
 }
+"""
+
+
+
+gemini_prompt= """
+You are an expert in parsing and extracting structured information from CVs. Your task is to analyze the provided CV text and extract the following details in a structured JSON format. The JSON must strictly adhere to the schema provided:
 """

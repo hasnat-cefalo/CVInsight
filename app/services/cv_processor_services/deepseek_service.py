@@ -1,15 +1,15 @@
 from openai import OpenAI
-from typing import List
+
 from app.config import settings
-from app.models.cv_model import CVModel, Experience, Education, Contact
 from app.services.cv_processor_services.base_service import BaseService
 from app.utils.prompt import prompt
 
+
 class DeepSeekService(BaseService):
     def __init__(self):
-        self.model = settings.openai_model
+        self.model = settings.deepseek_model
         self.client = OpenAI(
-            api_key=settings.openai_api_key,  # This is the default and can be omitted
+            api_key=settings.deepseek_api_key,  # This is the default and can be omitted
         )
 
     def _call_api(self, text: str) -> dict:
@@ -28,24 +28,3 @@ class DeepSeekService(BaseService):
             return response.choices[0].message
         except Exception as e:
             raise RuntimeError(f"OpenAI API error: {e}")
-
-    def parse_cv(self, text: List[str]) -> CVModel:
-        full_text = " ".join(text)
-        api_response = self._call_api(full_text)
-
-        # Convert OpenAI's response (string) to structured JSON
-        structured_data = eval(api_response)  # Ensure a safer parsing method in production
-
-        name = structured_data.get("name", "Unknown")
-        title = structured_data.get("title", "N/A")
-        contact = Contact(**structured_data.get("contact", {}))
-
-        education = [
-            Education(**edu) for edu in structured_data.get("education", [])
-        ]
-        experience = [
-            Experience(**exp) for exp in structured_data.get("experience", [])
-        ]
-        skills = structured_data.get("skills", [])
-
-        return CVModel(name=name, title=title, contact=contact, education=education, experience=experience, skills=skills, skills_from_work_experience=skills)

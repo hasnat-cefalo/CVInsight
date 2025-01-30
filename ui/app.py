@@ -1,7 +1,18 @@
 import os
+from datetime import datetime
+
 import requests
 import streamlit as st
-from datetime import datetime
+
+st.set_page_config(
+    page_title="CVInsight - AI CV Parser",
+    page_icon=":shark:",
+    menu_items={
+        'Get Help': "mailto:hasnat.abdullah@cefalo.com",
+        'Report a bug': "https://github.com/hasnat-cefalo/CVInsight/issues",
+        'About': "# Made with ❤️ by Hasnat. Copyright 2025 Cefalo. All rights reserved."
+    }
+)
 
 # Get the backend URL from environment variables
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000/api/v1")
@@ -18,12 +29,14 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 def format_date(date_str):
     """Formats a date string from 'YYYY-MM-DD' to 'Month YYYY'."""
     try:
         return datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %Y")
     except ValueError:
         return date_str  # Return as is if formatting fails
+
 
 def main():
     st.title("CVInsight - AI CV Parser")
@@ -36,13 +49,13 @@ def main():
         # Dropdown for selecting the parsing method
         service_type = st.selectbox(
             "Select AI Model",
-            options=["nlp", "chatgpt", "deepseek"],
+            options=["chatgpt", "deepseek", "gemini", "ollama"],
             index=0,
             help="Choose the AI model for CV parsing."
         )
 
         # Parse button
-        if st.button("🚀 Parse CV"):
+        if st.button("🚀 Parse CV", type="primary"):
             with st.spinner("🔍 Processing CV..."):
                 try:
                     # Prepare the file for sending
@@ -60,6 +73,7 @@ def main():
                         # Column 1: Formatted CV
                         with col1:
                             st.subheader("📜 Extracted Information")
+                            st.write("---")
                             st.write(f"**👤 Name:** {cv_data.get('name', 'N/A')}")
                             st.write(f"**📧 Title:** {cv_data.get('title', 'N/A')}")
 
@@ -69,7 +83,7 @@ def main():
                                 st.write("---")
                                 st.subheader("📞 Contact")
                                 st.write(f"**Email:** {contact.get('email', 'N/A')}")
-                                st.write(f"**hone:** {contact.get('phone', 'N/A')}")
+                                st.write(f"**Phone:** {contact.get('phone', 'N/A')}")
                                 st.write(f"**Location:** {contact.get('location', 'N/A')}")
                                 st.write(f"**Linkedin:** {contact.get('linkedin', 'N/A')}")
                                 st.write(f"**Github:** {contact.get('github', 'N/A')}")
@@ -83,7 +97,8 @@ def main():
                                     st.write(f"**{edu.get('degree', 'N/A')} in {edu.get('field_of_study', 'N/A')}**")
                                     st.write(f"🏫 {edu.get('institution', 'N/A')}")
                                     st.write(f"📍 {edu.get('location', 'N/A')}")
-                                    st.write(f"🗓️ {format_date(edu.get('start_date', 'N/A'))} - {format_date(edu.get('end_date', 'N/A'))}")
+                                    st.write(
+                                        f"🗓️ {format_date(edu.get('start_date', 'N/A'))} - {format_date(edu.get('end_date', 'N/A'))}")
                                     st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
                                                 unsafe_allow_html=True)
 
@@ -94,7 +109,8 @@ def main():
                                 for exp in cv_data["experience"]:
                                     st.write(f"**{exp.get('position', 'N/A')} at {exp.get('company', 'N/A')}**")
                                     st.write(f"📍 {exp.get('location', 'N/A')}")
-                                    st.write(f"🗓️ {format_date(exp.get('start_date', 'N/A'))} - {format_date(exp.get('end_date', 'N/A'))}")
+                                    st.write(
+                                        f"🗓️ {format_date(exp.get('start_date', 'N/A'))} - {format_date(exp.get('end_date', 'N/A'))}")
                                     st.write(f"📝 {exp.get('responsibilities', 'N/A')}")
                                     st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
                                                 unsafe_allow_html=True)
@@ -124,6 +140,7 @@ def main():
                     st.error(f"⚠️ Failed to connect to the backend: {e}")
                 except Exception as e:
                     st.error(f"⚠️ An unexpected error occurred: {e}")
+
 
 if __name__ == "__main__":
     main()

@@ -18,6 +18,9 @@ Successfully parsed CV
 ## Prerequisites
 - Python 3.9 or higher
 - Docker and Docker Compose (optional, for containerized deployment)
+- Ollama (https://ollama.com)
+  - after installation run: `ollama run {model_name}` ex: `ollama run deepseek-r1:7b`
+-API-KEY/token for LLM services OpenAI, DeepSeek, Gemini (all of them or any)
 
 
 ## 1. Clone the Repository
@@ -27,6 +30,9 @@ cd CVInsight
 ```
 
 ## Running the Application
+
+### Environment Variables
+Copy `example.env` to `.env` while keeping the original `.env-example` file unchanged. Change the value of variables in `.env` according to your requirements.
 
 ### Option 1: Run with **Docker Compose**
 Use Docker Compose to start the service:
@@ -47,6 +53,10 @@ pip install -r requirements.txt
 #### 2. Start the FastAPI server:
 ```bash
 uvicorn app.main:app --reload
+```
+#### 3. Start the Streamlit server:
+```bash
+streamlit run ui/app.py
 ```
 UI Link: [http://127.0.0.1:8501](http://127.0.0.1:8501) <br>
 API Link: [http://127.0.0.1:8000](http://127.0.0.1:8501)

@@ -4,17 +4,17 @@ from pydantic import BaseModel
 
 
 class Education(BaseModel):
-    degree: str
-    field_of_study: str
-    institution: str
+    degree: Optional[str]
+    field_of_study: Optional[str]
+    institution: Optional[str]
     location: Optional[str]
     start_date: Optional[str]
     end_date: Optional[str]
 
 
 class Experience(BaseModel):
-    position: str
-    company: str
+    position: Optional[str]
+    company: Optional[str]
     location: Optional[str]
     start_date: Optional[str]
     end_date: Optional[str]
@@ -22,8 +22,8 @@ class Experience(BaseModel):
 
 
 class Contact(BaseModel):
-    email: str
-    phone: str
+    email: Optional[str]
+    phone: Optional[str]
     location: Optional[str]
     linkedin: Optional[str]
     github: Optional[str]
