@@ -19,8 +19,8 @@ Successfully parsed CV
 - Python 3.9 or higher
 - Docker and Docker Compose (optional, for containerized deployment)
 - Ollama (https://ollama.com)
-  - after installation run: `ollama run {model_name}` ex: `ollama run deepseek-r1:7b`
--API-KEY/token for LLM services OpenAI, DeepSeek, Gemini (all of them or any)
+  - after installation run: `ollama run {model_name}` ex: `ollama run deepseek-r1:1.5b`
+- API-KEY/token for LLM services OpenAI, DeepSeek, Gemini (all of them or any)
 
 
 ## 1. Clone the Repository

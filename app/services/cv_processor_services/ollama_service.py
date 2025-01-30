@@ -28,9 +28,6 @@ class OllamaService(BaseService):
                 ],
                 format=CVModel.model_json_schema(),
             )
-            print(response.message.content)
-            print(type(response.message.content))
-
             return json.loads(response.message.content)
         except Exception as e:
             raise RuntimeError(f"Ollama API error: {e}")
