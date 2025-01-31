@@ -41,7 +41,7 @@ def format_date(date_str):
 def main():
     st.title("CVInsight - AI CV Parser")
     st.write("Upload a PDF CV and extract structured information using AI.")
-
+    st.write("")
     # File uploader
     uploaded_file = st.file_uploader("Upload a CV (.pdf)", type="pdf", help="Only PDF files are supported.")
 

@@ -44,6 +44,10 @@ FROM base AS ui
 # Copy UI code
 COPY ui/ ./ui/
 
+# Create the .streamlit directory and copy the config.toml file
+RUN mkdir -p /home/cefalo/.streamlit
+COPY ui/.streamlit/config.toml /home/cefalo/.streamlit/config.toml
+
 # Run as non-root user
 RUN useradd -m cefalo
 USER cefalo
