@@ -7,8 +7,6 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app/app
-    environment:
-      - DEBUG=True
     extra_hosts:
       - "host.docker.internal:host-gateway"
     logging:

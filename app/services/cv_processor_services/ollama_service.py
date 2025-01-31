@@ -17,6 +17,7 @@ class OllamaService(BaseService):
 
     def _call_api(self, text: str) -> dict:
         """Calls Ollama model to extract CV details."""
+        print(self.model)
         try:
             response = self.client.chat(
                 model=self.model,

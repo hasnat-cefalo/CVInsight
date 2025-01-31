@@ -20,6 +20,7 @@ Successfully parsed CV
 - Docker and Docker Compose (optional, for containerized deployment)
 - Ollama (https://ollama.com)
   - after installation run: `ollama run {model_name}` ex: `ollama run deepseek-r1:1.5b`
+  - If Olama runing from local, outside of the docker container, then `ollama_host="http://host.docker.internal:11434" if ollama running at port `11434`
 - API-KEY/token for LLM services OpenAI, DeepSeek, Gemini (all of them or any)
 
 
