@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import datetime
 
 import requests
@@ -13,6 +14,15 @@ st.set_page_config(
         'About': "# Made with ❤️ by Hasnat. Copyright 2025 Cefalo. All rights reserved."
     }
 )
+
+model_options = {
+    "DeepSeek (Local: R1-1.5B)": "deepseek-r1-1.5b",
+    "DeepSeek (Local: R1-7B)": "deepseek-r1-7b",
+    "DeepSeek (API)": "deepseek-api",
+    "Gemini (Google)": "gemini",
+    "Ollama (Local: custom)": "ollama",
+    "ChatGPT (OpenAI)": "chatgpt",
+}
 
 # Get the backend URL from environment variables
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000/api/v1")
@@ -47,25 +57,26 @@ def main():
 
     if uploaded_file is not None:
         # Dropdown for selecting the parsing method
-        service_type = st.selectbox(
-            "Select AI Model",
-            options=["chatgpt", "deepseek", "gemini", "ollama"],
+        model_type = st.selectbox(
+            "Select LLM Model",
+            options=list(model_options.keys()),
             index=0,
-            help="Choose the AI model for CV parsing."
+            help="Choose the LLM model for CV parsing."
         )
 
         # Parse button
         if st.button("🚀 Parse CV", type="primary"):
             with st.spinner("🔍 Processing CV..."):
+                start_time = time.time()
                 try:
                     # Prepare the file for sending
                     files = {"file": (uploaded_file.name, uploaded_file, uploaded_file.type)}
-                    params = {"service_type": service_type}
+                    params = {"model_type": model_options[model_type]}
                     response = requests.post(f"{BACKEND_URL}/parse-cv/", files=files, params=params)
-
+                    execution_time = time.time() - start_time
                     if response.status_code == 200:
                         cv_data = response.json()
-                        st.success("✅ CV Parsing Successful!")
+                        st.success(f"✅ CV Parsing Successful! (Execution Time: {execution_time:.3f} seconds)")
 
                         # Create two columns
                         col1, col2 = st.columns([2, 1])  # 2:1 ratio for better visibility

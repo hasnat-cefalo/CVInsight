@@ -1,24 +1,25 @@
 from typing import List
 
+from app.config import settings
 from app.models.cv_model import CVModel
 from app.services.cv_processor_services.chatgpt_service import ChatGPTService
 from app.services.cv_processor_services.deepseek_service import DeepSeekService
 from app.services.cv_processor_services.gemini_service import GeminiService
-from app.services.cv_processor_services.nlp_service import NLPService
 from app.services.cv_processor_services.ollama_service import OllamaService
+from app.utils.models import ModelType
 
 
 class CVProcessor:
     @staticmethod
-    def parse_cv(text: List[str], service_type: str) -> CVModel:
+    def parse_cv(text: str, model_type: ModelType) -> CVModel:
         service_map = {
-            "chatgpt": ChatGPTService,
-            "deepseek": DeepSeekService,
-            "nlp": NLPService,
-            "gemini": GeminiService,
-            "ollama": OllamaService,
+            ModelType.CHATGPT: ChatGPTService(model = settings.openai_model, api_key=settings.openai_api_key),
+            ModelType.DEEPSEEK_API: DeepSeekService(model = settings.deepseek_model, api_key=settings.deepseek_api_key),
+            ModelType.DEEPSEEK_R1_1_5B: OllamaService(model="deepseek-r1:1.5b"),
+            ModelType.DEEPSEEK_R1_7B: OllamaService(model="deepseek-r1:7b"),
+            ModelType.GEMINI: GeminiService(model=settings.gemini_model),
+            ModelType.OLLAMA: OllamaService(model=settings.ollama_model),
         }
-        service_class = service_map.get(service_type)
-        service = service_class()
+        service = service_map.get(model_type)
 
         return service.parse_cv(text)

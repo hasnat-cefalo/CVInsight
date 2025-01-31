@@ -1,29 +1,21 @@
 import logging
 import os
 import traceback
-from enum import Enum
 
 from fastapi import APIRouter, File, UploadFile, HTTPException, Query
 
 from app.models.cv_model import CVModel
 from app.services.cv_processor import CVProcessor
 from app.services.pdf_parser import PDFParser
+from app.utils.models import ModelType
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-class ServiceType(str, Enum):
-    NLP = "nlp"
-    CHATGPT = "chatgpt"
-    DEEPSEEK = "deepseek"
-    GEMINI = "gemini"
-    OLLAMA = "ollama"
-
-
 @router.post("/parse-cv/", response_model=CVModel)
 async def parse_cv(file: UploadFile = File(...),
-                   service_type: ServiceType = Query(..., description="Parsing method to use")):
+                   model_type: ModelType = Query(..., description="Parsing model to use")):
     if file.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="File must be a PDF")
 
@@ -38,7 +30,7 @@ async def parse_cv(file: UploadFile = File(...),
 
     try:
         text = PDFParser.extract_text_from_pdf(file_path)
-        cv_data = CVProcessor.parse_cv(text=text, service_type=service_type)
+        cv_data = CVProcessor.parse_cv(text=text, model_type=model_type)
         logger.info("successfully parsed CV")
         return cv_data
     except Exception as e:
@@ -53,5 +45,3 @@ async def parse_cv(file: UploadFile = File(...),
                 logger.info(f"Temporary file {file_path} removed successfully")
         except Exception as e:
             logger.error(f"Failed to remove temporary file: {e}")
-
-

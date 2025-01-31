@@ -19,9 +19,10 @@ Successfully parsed CV
 - Python 3.9 or higher
 - Docker and Docker Compose (optional, for containerized deployment)
 - Ollama (https://ollama.com)
-  - after installation run: `ollama run {model_name}` ex: `ollama run deepseek-r1:1.5b`
-  - If Olama runing from local, outside of the docker container, then `ollama_host="http://host.docker.internal:11434" if ollama running at port `11434`
-- API-KEY/token for LLM services OpenAI, DeepSeek, Gemini (all of them or any)
+  - after installation run: `ollama run {model_name}`
+  - pull Deepseek R1 1.5B model: `ollama run deepseek-r1:1.5b`
+  - pull Deepseek R1 7B model (Optional): `ollama run deepseek-r1:7b`
+- API-KEY/token for LLM services OpenAI, DeepSeek, Gemini (Optional)
 
 
 ## 1. Clone the Repository
@@ -33,7 +34,9 @@ cd CVInsight
 ## Running the Application
 
 ### Environment Variables
-Copy `example.env` to `.env` while keeping the original `.env-example` file unchanged. Change the value of variables in `.env` according to your requirements.
+Copy `example.env` to `.env` while keeping the original `.env-example` file unchanged. Change the value of variables in `.env` according to your requirements.<br>
+
+**Note**: If Olama runing from local, outside of the docker container, then `ollama_host="http://host.docker.internal:11434"` if ollama running at port `11434`
 
 ### Option 1: Run with **Docker Compose**
 Use Docker Compose to start the service:

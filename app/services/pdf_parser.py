@@ -1,5 +1,4 @@
 import PyPDF2
-from pandas.io.common import extension_to_compression
 
 
 class PDFParser:
@@ -15,5 +14,4 @@ class PDFParser:
                     if line:
                         content += line
                         content += '\n'
-        print(content)
         return content

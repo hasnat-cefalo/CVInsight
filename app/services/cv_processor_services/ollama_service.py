@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 
 from ollama import Client
 
@@ -9,15 +10,17 @@ from app.utils.prompt import prompt
 
 
 class OllamaService(BaseService):
-    def __init__(self):
-        self.model = settings.ollama_model
+    def __init__(self, model: str):
+        self.model = model
         self.client = Client(
             host=settings.ollama_host,
         )
 
     def _call_api(self, text: str) -> dict:
-        """Calls Ollama model to extract CV details."""
-        print(self.model)
+        """
+        Calls Ollama model to extract CV details.
+        Reference: https://github.com/ollama/ollama-python
+        """
         try:
             response = self.client.chat(
                 model=self.model,
