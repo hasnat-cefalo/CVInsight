@@ -1,17 +1,17 @@
 prompt = """
-You are an expert in parsing and extracting structured information from CVs. Your task is to analyze the provided CV text and extract the following details in a structured JSON format. The JSON must strictly adhere to the schema provided below:
+Below is the text extracted from a CV. Your task is to organize the text into the following JSON format. Use only the exact words from the text. Do not add or summarize or hallucinate anything. If a field is missing, leave it as null.
 
-### JSON Schema:
+Desired JSON format:
 {
   "name": "Full Name of the Candidate",
-  "title": "Professional Title or Role",
+  "title": "Latest Professional Title or Role",
   "contact": {
     "email": "Email Address",
     "phone": "Phone Number",
-    "location": "Location",
-    "linkedin": "LinkedIn Profile",
-    "github": "GitHub Profile",
-    "website": "Personal Website"
+    "location": "Candidate's Location/address",
+    "linkedin": "LinkedIn Profile link",
+    "github": "GitHub Profile link",
+    "other_links": ["other profile links"]
   },
   "education": [
     {
@@ -20,7 +20,8 @@ You are an expert in parsing and extracting structured information from CVs. You
       "institution": "Institution Name",
       "location": "Location of Institution",
       "start_date": "Start Date (YYYY-MM-DD)",
-      "end_date": "End Date (YYYY-MM-DD or 'Present')"
+      "end_date": "End Date (YYYY-MM-DD or 'Present')",
+      "result": "Result (if available)"
     }
   ],
   "experience": [
@@ -30,18 +31,30 @@ You are an expert in parsing and extracting structured information from CVs. You
       "location": "Location of Employment",
       "start_date": "Start Date (YYYY-MM-DD)",
       "end_date": "End Date (YYYY-MM-DD or 'Present')",
-      "responsibilities": "Key Responsibilities"
+      "responsibilities": "Responsibilities or descriptions"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Project Title",
+      "description": "Project Description",
+      "start_date": "Start Date (YYYY-MM-DD)",
+      "end_date": "End Date (YYYY-MM-DD or 'Present')",
+      "technologies_used": ["List of Technologies Used"]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certification Name",
+      "issuing_organization": "Issuing Organization",
+      "issue_date": "Issue Date (YYYY-MM-DD)",
+      "expiration_date": "Expiration Date (YYYY-MM-DD or 'Present')",
+      "credential_id": "Credential ID"
     }
   ],
   "skills": ["List of Skills Mentioned in the CV"],
   "skills_from_work_experience": [
-    "Top 5 to 10 Skills Derived only from Work Experiences"
+    "Maximum Top 10 Skills Derived only from Work Experiences"
   ]
 }
-"""
-
-
-
-gemini_prompt= """
-You are an expert in parsing and extracting structured information from CVs. Your task is to analyze the provided CV text and extract the following details in a structured JSON format. The JSON must strictly adhere to the schema provided:
 """

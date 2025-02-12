@@ -15,8 +15,9 @@ class CVProcessor:
         service_map = {
             ModelType.CHATGPT: ChatGPTService(model = settings.openai_model, api_key=settings.openai_api_key),
             ModelType.DEEPSEEK_API: DeepSeekService(model = settings.deepseek_model, api_key=settings.deepseek_api_key),
-            ModelType.DEEPSEEK_R1_1_5B: OllamaService(model="deepseek-r1:1.5b"),
-            ModelType.DEEPSEEK_R1_7B: OllamaService(model="deepseek-r1:7b"),
+            ModelType.DEEPSEEK_R1_1_5B: OllamaService(model=ModelType.DEEPSEEK_R1_1_5B),
+            ModelType.DEEPSEEK_R1_8B: OllamaService(model=ModelType.DEEPSEEK_R1_8B),
+            ModelType.DEEPSEEK_R1_14B: OllamaService(model=ModelType.DEEPSEEK_R1_14B),
             ModelType.GEMINI: GeminiService(model=settings.gemini_model),
             ModelType.OLLAMA: OllamaService(model=settings.ollama_model),
         }

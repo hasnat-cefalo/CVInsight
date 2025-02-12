@@ -1,3 +1,5 @@
+import json
+
 from openai import OpenAI
 
 from app.services.cv_processor_services.base_service import BaseService
@@ -24,7 +26,6 @@ class DeepSeekService(BaseService):
                 response_format={'type': 'json_object'},
                 timeout=8
             )
-            print(response)
-            return response.choices[0].message
+            return json.loads(response.choices[0].message.content.strip())
         except Exception as e:
             raise RuntimeError(f"OpenAI API error: {e}")

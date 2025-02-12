@@ -33,8 +33,6 @@ class GeminiService(BaseService):
                     response_mime_type="application/json")
             )
 
-            logger.info(f"Response: {response.text}")
-            logger.info(f"json parsed: {response.text}")
             return json.loads(response.text)
         except Exception as e:
             logging.error(traceback.format_exc())

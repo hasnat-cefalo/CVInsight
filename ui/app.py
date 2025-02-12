@@ -16,12 +16,14 @@ st.set_page_config(
 )
 
 model_options = {
-    "DeepSeek (Local: R1-1.5B)": "deepseek-r1-1.5b",
-    "DeepSeek (Local: R1-7B)": "deepseek-r1-7b",
+    "DeepSeek (Local: R1-1.5B)": "deepseek-r1:1.5b",
+    "DeepSeek (Local: R1-8B)": "deepseek-r1:8b",
+    "DeepSeek (Local: R1-14B)": "deepseek-r1:14b",
     "DeepSeek (API)": "deepseek-api",
     "Gemini (Google)": "gemini",
-    "Ollama (Local: custom)": "ollama",
     "ChatGPT (OpenAI)": "chatgpt",
+    "Ollama (Local: custom)": "ollama"
+
 }
 
 # Get the backend URL from environment variables
@@ -44,7 +46,7 @@ def format_date(date_str):
     """Formats a date string from 'YYYY-MM-DD' to 'Month YYYY'."""
     try:
         return datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %Y")
-    except ValueError:
+    except Exception as e:
         return date_str  # Return as is if formatting fails
 
 
@@ -98,7 +100,11 @@ def main():
                                 st.write(f"**Location:** {contact.get('location', 'N/A')}")
                                 st.write(f"**Linkedin:** {contact.get('linkedin', 'N/A')}")
                                 st.write(f"**Github:** {contact.get('github', 'N/A')}")
-                                st.write(f"**Website:** {contact.get('website', 'N/A')}")
+                                # Other Links
+                                if "other_links" in contact and contact["other_links"]:
+                                    st.write(f"**Other Links:**")
+                                    for link in contact["other_links"]:
+                                        st.markdown(f"- [{link}]({link})")
 
                             # Education
                             if "education" in cv_data and cv_data["education"]:
@@ -123,6 +129,32 @@ def main():
                                     st.write(
                                         f"🗓️ {format_date(exp.get('start_date', 'N/A'))} - {format_date(exp.get('end_date', 'N/A'))}")
                                     st.write(f"📝 {exp.get('responsibilities', 'N/A')}")
+                                    st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
+                                                unsafe_allow_html=True)
+
+                            # Projects
+                            if "projects" in cv_data and cv_data["projects"]:
+                                st.write("---")
+                                st.subheader("📁 Projects")
+                                for project in cv_data["projects"]:
+                                    st.write(f"**{project.get('title', 'N/A')}**")
+                                    st.write(f"📝 {project.get('description', 'N/A')}")
+                                    st.write(f"🛠 Technologies: {', '.join(project.get('technologies_used', []))}")
+                                    st.write(
+                                        f"🗓️ {format_date(project.get('start_date', 'N/A'))} - {format_date(project.get('end_date', 'N/A'))}")
+                                    st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
+                                                unsafe_allow_html=True)
+
+                            # Certifications
+                            if "certifications" in cv_data and cv_data["certifications"]:
+                                st.write("---")
+                                st.subheader("📜 Certifications")
+                                for cert in cv_data["certifications"]:
+                                    st.write(f"**{cert.get('name', 'N/A')}**")
+                                    st.write(f"🏢 {cert.get('issuing_organization', 'N/A')}")
+                                    st.write(
+                                        f"🗓️ {format_date(cert.get('issue_date', 'N/A'))} - {format_date(cert.get('expiration_date', 'N/A'))}")
+                                    st.write(f"🔖 Credential ID: {cert.get('credential_id', 'N/A')}")
                                     st.markdown("<hr style='border:1px solid #ccc; margin:5px 0;'>",
                                                 unsafe_allow_html=True)
 

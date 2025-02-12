@@ -26,8 +26,12 @@ class OllamaService(BaseService):
                 model=self.model,
                 messages=[
                     {
+                        "role": "system",
+                        "content": "You are a helpful assistant that organizes CV text into structured JSON format."
+                    },
+                    {
                         'role': 'user',
-                        'content': f"You are a CV parsing assistant.\n{prompt}\n###pdf content\n{text}",
+                        'content': f"{prompt}\nCV Text:\n{text}",
                     },
                 ],
                 format=CVModel.model_json_schema(),
