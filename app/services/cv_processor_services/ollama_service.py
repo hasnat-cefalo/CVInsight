@@ -3,7 +3,7 @@ from typing import Optional
 
 from ollama import Client
 
-from app.config import settings
+# from app.config import settings
 from app.models.cv_model import CVModel
 from app.services.cv_processor_services.base_service import BaseService
 from app.utils.prompt import prompt
@@ -13,7 +13,7 @@ class OllamaService(BaseService):
     def __init__(self, model: str):
         self.model = model
         self.client = Client(
-            host=settings.ollama_host,
+            host="localhost:11434",
         )
 
     def _call_api(self, text: str) -> dict:
