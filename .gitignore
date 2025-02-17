@@ -10,3 +10,6 @@ __pycache__/
 /tmp/
 .idea
 .venv
+/cv_processed/
+/cv_uploads/
+/cv_processed_pdfs/

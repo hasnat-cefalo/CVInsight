@@ -1,5 +1,5 @@
 prompt = """
-Below is the text extracted from a CV. Your task is to organize the text into the following JSON format. Use only the exact words from the text. Do not add or summarize or hallucinate anything. If a field is missing, leave it as null.
+I have a markdown-formatted CV. Please extract all the relevant information and provide a structured JSON output with the following fields:
 
 Desired JSON format:
 {
@@ -10,7 +10,7 @@ Desired JSON format:
     "phone": "Phone Number",
     "location": "Candidate's Location/address",
     "linkedin": "LinkedIn Profile link",
-    "github": "GitHub Profile link",
+    "github": "GitHub/gitlab/bitbucket Profile link",
     "other_links": ["other profile links"]
   },
   "education": [
@@ -57,4 +57,6 @@ Desired JSON format:
     "Maximum Top 10 Skills Derived only from Work Experiences"
   ]
 }
+
+Use the exact words from the provided CV text. Do not add or summarize or hallucinate anything. If a field is missing, leave it as null.
 """
