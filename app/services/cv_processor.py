@@ -18,6 +18,9 @@ class CVProcessor:
             ModelType.DEEPSEEK_R1_1_5B: OllamaService(model=ModelType.DEEPSEEK_R1_1_5B),
             ModelType.DEEPSEEK_R1_8B: OllamaService(model=ModelType.DEEPSEEK_R1_8B),
             ModelType.DEEPSEEK_R1_14B: OllamaService(model=ModelType.DEEPSEEK_R1_14B),
+            ModelType.MISTRAL: OllamaService(model=ModelType.MISTRAL),
+            ModelType.QWEN_1_8B: OllamaService(model=ModelType.QWEN_1_8B),
+            ModelType.QWEN_14B: OllamaService(model=ModelType.QWEN_14B),
             ModelType.GEMINI: GeminiService(model=settings.gemini_model),
             ModelType.OLLAMA: OllamaService(model=settings.ollama_model),
         }
