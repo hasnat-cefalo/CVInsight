@@ -12,8 +12,9 @@ This is a FastAPI-based AI powered CV parser application that extracts structure
 2. DeepSeek
 3. DeepSeek R1 1.5B
 4. DeepSeek R1 7B
-5. Gemini 
-6. Ollama (Any LLM model run by Ollama)
+5. DeepSeek R1 14B
+6. Gemini 
+7. Ollama (Any LLM model run by Ollama)
 
 ## Screenshots
 Welcome screen
@@ -23,6 +24,8 @@ CV (.pdf) file uploaded
 Successfully parsed CV
 ![](/media/screen-3.png "Successfully parsed CV")
 
+## System Design
+![](/media/CVInsight_system_design.png "System Design")
 ## Prerequisites
 - Python 3.9 or higher
 - Docker and Docker Compose (optional, for containerized deployment)
