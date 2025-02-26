@@ -1,5 +1,5 @@
 prompt = """
-I have a markdown-formatted CV. Please extract all the relevant information and provide a structured JSON output with the following fields:
+I have extracted text from a pdf formatted resume. Please organize all the relevant information and provide a structured JSON output with the following fields:
 
 Desired JSON format:
 {
